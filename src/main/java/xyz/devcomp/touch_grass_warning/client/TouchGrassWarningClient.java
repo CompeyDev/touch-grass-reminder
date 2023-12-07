@@ -20,7 +20,8 @@ public class TouchGrassWarningClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient(ModContainer mod) {
-		LOGGER.info("Touch Grass Warning init; isEnabled={}, reminderFrequency={}h", config.isEnabled, config.reminderFrequency);
+		LOGGER.info("Touch Grass Warning init; isEnabled={}, reminderFrequency={}h", config.isEnabled,
+				config.reminderFrequency);
 		LOGGER.info("Registering JOIN & DISCONNECT events...");
 
 		if (config.isEnabled) {

@@ -15,9 +15,11 @@ public class PlayDurationHandler implements Runnable {
     public PlayDurationHandler(Minecraft client, long startTime, int reminderFrequency) {
         this.client = client;
         this.startTime = startTime;
+        this.reminderFrequency = reminderFrequency;
 
-        this.toast = new SystemToast(SystemToastIds.TUTORIAL_HINT, Component.literal(String.format("You've been playing for greater than %d hours", reminderFrequency)),
-                Component.literal("Excessive gaming may interfere with normal daily life"));
+        this.toast = new SystemToast(SystemToastIds.TUTORIAL_HINT,
+                Component.translatable("touch_grass_warning.toast.name", reminderFrequency),
+                Component.translatable("touch_grass_warning.toast.description"));
     }
 
     @Override
@@ -34,7 +36,7 @@ public class PlayDurationHandler implements Runnable {
             }
 
             try {
-                // Check every 10 minutes
+                // Recheck every 10 minutes
                 Thread.sleep(10 * 60 * 1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();

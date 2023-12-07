@@ -12,5 +12,5 @@ public class ConfigModel {
     @SerialEntry(comment = "Number of hours the warning should be displayed after")
     @AutoGen(category = "touch_grass_warning")
     @IntField(min = 1)
-    public int reminderFrequency = 24; 
+    public int reminderFrequency = 24;
 }
