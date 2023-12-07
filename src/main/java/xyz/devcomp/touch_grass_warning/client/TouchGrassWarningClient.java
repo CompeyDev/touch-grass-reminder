@@ -2,48 +2,55 @@ package xyz.devcomp.touch_grass_warning.client;
 
 import java.util.UUID;
 
+import xyz.devcomp.touch_grass_warning.config.ConfigModel;
+import xyz.devcomp.touch_grass_warning.utils.PlayDurationHandler;
+
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
 import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.minecraft.client.network.ServerInfo;
+import net.minecraft.client.multiplayer.ServerData;
 
 public class TouchGrassWarningClient implements ClientModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("Touch Grass Warning");
-	private Thread t;
+	private ConfigModel config = new ConfigModel();
+	private Thread thread;
 
 	@Override
 	public void onInitializeClient(ModContainer mod) {
+		LOGGER.info("Touch Grass Warning init; isEnabled={}, reminderFrequency={}h", config.isEnabled, config.reminderFrequency);
 		LOGGER.info("Registering JOIN & DISCONNECT events...");
 
-		ClientPlayConnectionEvents.JOIN.register((net, packet, client) -> {
-			UUID sessionId = net.getSessionId();
-			ServerInfo serverInfo = net.getServerInfo() == null ? new ServerInfo("Unknown", "Unknown", false)
-					: net.getServerInfo();
+		if (config.isEnabled) {
+			ClientPlayConnectionEvents.JOIN.register((net, packet, client) -> {
+				UUID sessionId = net.getId();
+				ServerData serverInfo = net.getServerData() == null ? new ServerData("Unknown", "Unknown", false)
+						: net.getServerData();
 
-			LOGGER.info(
-					"Player initiated connection; sessionId={}, name={}, version={}, protocolVersion={}, isLocal={}, isOnline={}",
-					sessionId, serverInfo.name, serverInfo.version, serverInfo.protocolVersion, serverInfo.isLocal(),
-					serverInfo.online);
+				LOGGER.info(
+						"Player initiated connection; sessionId={}, name={}, version={}, protocolVersion={}, isLocal={}",
+						sessionId, serverInfo.name, serverInfo.version, serverInfo.protocol, serverInfo.isLan());
 
-			PlayDurationHandler worker = new PlayDurationHandler(client, System.currentTimeMillis());
+				PlayDurationHandler worker = new PlayDurationHandler(client, System.currentTimeMillis(),
+						config.reminderFrequency * 60 * 60 * 1000);
 
-			t = new Thread(worker);
-			t.start();
+				thread = new Thread(worker);
+				thread.start();
 
-			LOGGER.info("Successfully started worker thread!");
-		});
+				LOGGER.info("Successfully started worker thread!");
+			});
 
-		ClientPlayConnectionEvents.DISCONNECT.register((net, client) -> {
-			LOGGER.info("Player initiated disconnection. Resetting grass touching timer.");
+			ClientPlayConnectionEvents.DISCONNECT.register((net, client) -> {
+				LOGGER.info("Player initiated disconnection. Resetting grass touching timer.");
 
-			if (!t.isInterrupted()) {
-				t.interrupt();
-			} else {
-				LOGGER.warn("Thread is already interrupted!");
-			}
-		});
+				if (!thread.isInterrupted()) {
+					thread.interrupt();
+				} else {
+					LOGGER.warn("Thread is already interrupted!");
+				}
+			});
+		}
 	}
 }

@@ -1,0 +1,9 @@
+{
+    "yacl3.config.touchgrassreminder:config.category.touch_grass_warning": "Touch Grass Reminder", 
+    "yacl3.config.touchgrassreminder:config.isEnabled": "Enabled",
+    "yacl3.config.touchgrassreminder:config.isEnabled.desc.1": "Whether most of the mod's functionality is enabled",
+    "yacl3.config.touchgrassreminder:config.isEnabled.desc.2": "Takes effect on restart",
+    "yacl3.config.touchgrassreminder:config.reminderFrequency": "Reminder frequency",
+    "yacl3.config.touchgrassreminder:config.reminderFrequency.desc.1": "After how long the warning should appear (in hours)",
+    "yacl3.config.touchgrassreminder:config.reminderFrequency.desc.2": "Takes effect on restart"
+}

@@ -11,45 +11,49 @@ version = "$project.version+${libs.versions.minecraft.get()}"
 group = project.maven_group
 
 repositories {
-	// Add repositories to retrieve artifacts from in here.
-	// You should only use this when depending on other mods because
-	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
-	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
-	// for more information about repositories.
+	mavenCentral()
+	maven {
+		// For ImageIO
+		name "SonaType Maven"
+		url "https://oss.sonatype.org/content/repositories/snapshots"
+	}
+
+	maven {
+		// For YACL
+		name "Xander Maven"
+		url "https://maven.isxander.dev/releases"
+	}
+
+	maven { 
+		// For quilt-parsers
+		name "QuiltMC Maven"
+		url "https://maven.quiltmc.org/repository/release"
+	}
+
+	maven {
+		// For modmenu
+		name "TerraformersMC Maven"
+		url "https://maven.terraformersmc.com/releases"
+	}
 }
 
 loom {
-	// Loom and Loader both use this block in order to gather more information about your mod.
 	mods {
-		// This should match your mod id.
 		"touch_grass_warning" {
-			// Tell Loom about each source set used by your mod here. This ensures that your mod's classes are properly transformed by Loader.
 			sourceSet("main")
-			// If you shade (directly include classes, not JiJ) a dependency into your mod, include it here using one of these methods:
-			// dependency("com.example.shadowedmod:1.2.3")
-			// configuration("exampleShadedConfigurationName")
 		}
 	}
 }
 
-// All the dependencies are declared at gradle/libs.version.toml and referenced with "libs.<id>"
-// See https://docs.gradle.org/current/userguide/platforms.html for information on how version catalogs work.
 dependencies {
 	minecraft libs.minecraft
-	mappings variantOf(libs.quilt.mappings) { classifier 'intermediary-v2' }
-	// Replace the above line with the block below if you want to use Mojang mappings as your primary mappings, falling back on QM for parameters and Javadocs
-	/*
 	mappings loom.layered {
 		mappings "org.quiltmc:quilt-mappings:${libs.versions.quilt.mappings.get()}:intermediary-v2"
 		officialMojangMappings()
 	}
-	*/
 	modImplementation libs.quilt.loader
-
-	// QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
-	// Quilted Fabric API will automatically pull in the correct QSL version.
 	modImplementation libs.quilted.fabric.api
-	// modImplementation libs.bundles.quilted.fabric.api // If you wish to use Fabric API's deprecated modules, you can replace the above line with this one
+    modImplementation "dev.isxander.yacl:yet-another-config-lib-fabric:3.2.1+1.20"
 }
 
 processResources {
@@ -62,32 +66,22 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = 'UTF-8'
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
 	it.options.release = 17
 }
 
 java {
-	// Still required by IDEs such as Eclipse and Visual Studio Code
 	sourceCompatibility = JavaVersion.VERSION_17
 	targetCompatibility = JavaVersion.VERSION_17
 
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task if it is present.
-	// If you remove this line, sources will not be generated.
 	withSourcesJar()
-
-	// If this mod is going to be a library, then it should also generate Javadocs in order to aid with development.
-	// Uncomment this line to generate them.
-	// withJavadocJar()
 }
 
-// If you plan to use a different file for the license, don't forget to change the file name here!
 jar {
 	from('LICENSE') {
 		rename { "${it}_${base.archivesName.get()}" }
 	}
 }
 
-// Configure the maven publication
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
