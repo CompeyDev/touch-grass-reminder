@@ -1,0 +1,41 @@
+{
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "xyz.devcomp",
+		"id": "touch_grass_warning",
+		"version": "${version}",
+		"metadata": {
+			"name": "Touch Grass Warning",
+			"description": "Client-side mod which warns players when they have been excessively playing Minecraft (more than 24 hours at a time).",
+			"contributors": {
+				"Erica Marigold": "Owner"
+			},
+			"contact": {
+				"homepage": "",
+				"issues": "https://github.com/CompeyDev/touch-grass-warning/issues",
+				"sources": "https://github.com/CompeyDev/touch-grass-warning"
+			},
+			"license": "LGPL-3.0-only",
+			"icon": "assets/touch_grass_warning/icon.png"
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"client_init": "xyz.devcomp.touch_grass_warning.client.TouchGrassWarningClient"
+		},
+		"depends": [
+			{
+				"id": "quilt_loader",
+				"versions": ">=0.22.1-"
+			},
+			{
+				"id": "quilted_fabric_api",
+				"versions": ">=7.4.0+0.90.0-"
+			},
+			{
+				"id": "minecraft",
+				"versions": "~1.20.1"
+			}
+		]
+	},
+	"mixin": "touch_grass_warning.mixins.json"
+}
