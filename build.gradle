@@ -39,7 +39,7 @@ repositories {
 
 loom {
 	mods {
-		"touch_grass_warning" {
+		"touch_grass_reminder" {
 			sourceSet("main")
 		}
 	}

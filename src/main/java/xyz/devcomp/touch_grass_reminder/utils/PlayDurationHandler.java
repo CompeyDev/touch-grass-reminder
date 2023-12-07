@@ -1,10 +1,11 @@
-package xyz.devcomp.touch_grass_warning.utils;
+package xyz.devcomp.touch_grass_reminder.utils;
+
+import xyz.devcomp.touch_grass_reminder.client.TouchGrassReminderClient;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.components.toasts.SystemToast.SystemToastIds;
 import net.minecraft.network.chat.Component;
-import xyz.devcomp.touch_grass_warning.client.TouchGrassWarningClient;
 
 public class PlayDurationHandler implements Runnable {
     Minecraft client;
@@ -18,18 +19,18 @@ public class PlayDurationHandler implements Runnable {
         this.reminderFrequency = reminderFrequency;
 
         this.toast = new SystemToast(SystemToastIds.TUTORIAL_HINT,
-                Component.translatable("touch_grass_warning.toast.name", reminderFrequency),
-                Component.translatable("touch_grass_warning.toast.description"));
+                Component.translatable("touch_grass_reminder.toast.name", reminderFrequency),
+                Component.translatable("touch_grass_reminder.toast.description"));
     }
 
     @Override
     public void run() {
-        TouchGrassWarningClient.LOGGER.info("Started playing Minecraft at: {}", this.startTime);
+        TouchGrassReminderClient.LOGGER.info("Started playing Minecraft at: {}", this.startTime);
 
         while (true) {
             if (System.currentTimeMillis() - this.startTime > this.reminderFrequency) {
-                TouchGrassWarningClient.LOGGER
-                        .info("Player has spent more than 24 hours in Minecraft. Displaying warning.");
+                TouchGrassReminderClient.LOGGER
+                        .info("Player has spent more than 24 hours in Minecraft. Displaying reminder.");
 
                 this.client.getToasts().addToast(toast);
                 return;

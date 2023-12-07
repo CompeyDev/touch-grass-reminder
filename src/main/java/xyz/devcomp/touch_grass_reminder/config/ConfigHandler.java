@@ -1,4 +1,4 @@
-package xyz.devcomp.touch_grass_warning.config;
+package xyz.devcomp.touch_grass_reminder.config;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
@@ -20,5 +20,4 @@ public class ConfigHandler {
     public Screen showGui(Screen parent) {
         return HANDLER.generateGui().generateScreen(parent);
     }
-
 }

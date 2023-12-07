@@ -2,26 +2,26 @@
   "schema_version": 1,
   "quilt_loader": {
     "group": "xyz.devcomp",
-    "id": "touch_grass_warning",
+    "id": "touch_grass_reminder",
     "version": "${version}",
     "metadata": {
-      "name": "Touch Grass Warning",
-      "description": "Client-side mod which warns players when they have been excessively playing Minecraft (more than 24 hours at a time).",
+      "name": "Touch Grass Reminder",
+      "description": "Client-side mod which warns players when they have been excessively playing Minecraft (by default more than 24 hours at a time).",
       "contributors": {
         "Erica Marigold": "Owner"
       },
       "contact": {
         "homepage": "",
-        "issues": "https://github.com/CompeyDev/touch-grass-warning/issues",
-        "sources": "https://github.com/CompeyDev/touch-grass-warning"
+        "issues": "https://github.com/CompeyDev/touch-grass-reminder/issues",
+        "sources": "https://github.com/CompeyDev/touch-grass-reminder"
       },
       "license": "LGPL-3.0-only",
-      "icon": "assets/touch_grass_warning/icon.png"
+      "icon": "assets/touch_grass_reminder/icon.png"
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
     "entrypoints": {
-      "client_init": "xyz.devcomp.touch_grass_warning.client.TouchGrassWarningClient",
-      "modmenu": "xyz.devcomp.touch_grass_warning.integrations.ModMenuIntegration"
+      "client_init": "xyz.devcomp.touch_grass_reminder.client.TouchGrassreminderClient",
+      "modmenu": "xyz.devcomp.touch_grass_reminder.integrations.ModMenuIntegration"
     },
     "depends": [
       {
@@ -43,5 +43,5 @@
       }
     ]
   },
-  "mixin": "touch_grass_warning.mixins.json"
+  "mixin": "touch_grass_reminder.mixins.json"
 }

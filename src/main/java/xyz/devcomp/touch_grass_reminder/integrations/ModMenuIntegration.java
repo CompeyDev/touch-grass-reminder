@@ -1,11 +1,11 @@
-package xyz.devcomp.touch_grass_warning.integrations;
+package xyz.devcomp.touch_grass_reminder.integrations;
+
+import xyz.devcomp.touch_grass_reminder.config.ConfigHandler;
 
 import org.quiltmc.loader.api.QuiltLoader;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-
-import xyz.devcomp.touch_grass_warning.config.ConfigHandler;
 
 public class ModMenuIntegration implements ModMenuApi {
     @Override
