@@ -8,10 +8,10 @@
       "name": "Touch Grass Reminder",
       "description": "Client-side mod which warns players when they have been excessively playing Minecraft (by default more than 24 hours at a time).",
       "contributors": {
-        "Erica Marigold": "Owner"
+        "DevComp": "Owner"
       },
       "contact": {
-        "homepage": "",
+        "homepage": "https://modrinth.com/mod/touch-grass-reminder",
         "issues": "https://github.com/CompeyDev/touch-grass-reminder/issues",
         "sources": "https://github.com/CompeyDev/touch-grass-reminder"
       },
@@ -20,7 +20,7 @@
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
     "entrypoints": {
-      "client_init": "xyz.devcomp.touch_grass_reminder.client.TouchGrassreminderClient",
+      "client_init": "xyz.devcomp.touch_grass_reminder.client.TouchGrassReminderClient",
       "modmenu": "xyz.devcomp.touch_grass_reminder.integrations.ModMenuIntegration"
     },
     "depends": [
@@ -42,6 +42,5 @@
         "versions": ">=3.2.1+1.20-"
       }
     ]
-  },
-  "mixin": "touch_grass_reminder.mixins.json"
+  }
 }
