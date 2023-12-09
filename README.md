@@ -13,7 +13,7 @@
 
 <br />
 
-A client-side quilt/fabric mod which warns players when they have been excessively playing Minecraft, to go outside and touch grass. [Studies](https://www.health.harvard.edu/blog/the-health-effects-of-too-much-gaming-2020122221645)
+A client-side quilt mod which warns players when they have been excessively playing Minecraft, to go outside and touch grass. [Studies](https://www.health.harvard.edu/blog/the-health-effects-of-too-much-gaming-2020122221645)
 have shown the negative impacts of excessive gaming on the brain.
 
 # Features
